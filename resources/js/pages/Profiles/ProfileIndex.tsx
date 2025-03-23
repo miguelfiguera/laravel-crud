@@ -14,7 +14,7 @@ function ProfileIndex() {
     return (
         <div className="min-h-screen">
             <Head title="Profile" />
-            <div className="container mx-auto flex flex-row items-start justify-between px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
+            <div className="container mx-auto flex flex-row items-start justify-between border-b-2 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
                 {/* Left Side: Heading and Description */}
                 <div>
                     <h1 className="text-2xl font-semibold text-gray-800 sm:text-3xl">Client List</h1>
@@ -26,7 +26,6 @@ function ProfileIndex() {
                     + New Client
                 </button>
             </div>
-            <div className="container mx-auto border"></div>
 
             <div className="container mx-auto mt-4 px-3">
                 <div className="sd:flex my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
@@ -39,7 +38,13 @@ function ProfileIndex() {
                     </div>
                 </div>
             </div>
-            <div className="container mx-auto mt-4 px-3">{mappedProfiles}</div>
+            {profiles.length > 0 ? (
+                <div className="container mx-auto mt-4 px-3">{mappedProfiles}</div>
+            ) : (
+                <div className="sd:flex container mx-auto my-2 mt-4 min-h-25 max-w-[1512px] items-center justify-between rounded-md border-b-2 bg-white px-3 py-4 shadow-sm">
+                    <p className="text-center text-4xl font-bold text-gray-600">No profiles found.</p>
+                </div>
+            )}
         </div>
     );
 }

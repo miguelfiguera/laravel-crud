@@ -6,12 +6,9 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-
 class ProfilesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $profiles = profile::all();
@@ -40,9 +37,9 @@ class ProfilesController extends Controller
             'country' => 'required|string|max:255',
         ]);
 
-        Profile::create($request->all());
+        profile::create($request->all());
 
-        return redirect()->route('Profiles/index')
+        return redirect()->route('profiles.index')
             ->with('success', 'Profile created successfully.');
     }
 
@@ -59,7 +56,7 @@ class ProfilesController extends Controller
      */
     public function edit(profile $profile)
     {
-        //
+        return Inertia::render('Profiles/CreateProfile', ['profile' => $profile]);
     }
 
     /**
@@ -67,7 +64,19 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, profile $profile)
     {
-        //
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:profiles,email,' . $profile->id,
+            'phone' => 'required|string|unique:profiles,phone,' . $profile->id,
+            'address' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+        ]);
+
+        $profile->update($request->all());
+
+        return redirect()->route('profiles.index')
+            ->with('success', 'Profile updated successfully.');
     }
 
     /**
@@ -75,6 +84,10 @@ class ProfilesController extends Controller
      */
     public function destroy(profile $profile)
     {
-        //
+
+        $profile->delete();
+
+        return redirect()->route('profiles.index')
+            ->with('success', 'Profile deleted successfully.');
     }
 }
