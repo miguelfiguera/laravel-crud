@@ -1,6 +1,35 @@
 import { profile } from '@/lib/interfaces';
+import { useForm, usePage } from '@inertiajs/react';
+import { toast } from 'react-toastify';
 
-function ProfileItem({ profile }: { profile: Partial<profile> }) {
+function ProfileItem({ profile }: { profile: profile }) {
+    const { flash } = usePage().props;
+    const {
+        data,
+        put,
+        delete: destroy,
+        processing,
+        errors,
+    } = useForm({
+        full_name: profile.full_name,
+        phone: profile.phone,
+        email: profile.email,
+        country: profile.country,
+        id: profile.id,
+    });
+    const handleDelete = (profile: profile) => {
+        if (confirm('Are you sure you want to delete this profile?')) {
+            destroy(route('profiles.destroy', profile.id), {
+                onSuccess: () => {
+                    toast.success(`${profile.full_name} deleted successfully`);
+                },
+                onError: () => {
+                    toast.error('Failed to delete profile');
+                },
+            });
+        }
+    };
+
     return (
         <div className="sd:flex my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
             {/* Mobile Card View */}
@@ -41,7 +70,10 @@ function ProfileItem({ profile }: { profile: Partial<profile> }) {
                     <button className="focus:shadow-outline mr-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
                         Edit
                     </button>
-                    <button className="focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none">
+                    <button
+                        onClick={() => handleDelete(profile)}
+                        className="focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
+                    >
                         Delete
                     </button>
                 </div>
