@@ -42,7 +42,7 @@ class ProfilesController extends Controller
 
         Profile::create($request->all());
 
-        return redirect()->route('profiles.index')
+        return redirect()->route('Profiles/index')
             ->with('success', 'Profile created successfully.');
     }
 
