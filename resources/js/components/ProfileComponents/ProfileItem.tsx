@@ -1,19 +1,17 @@
 import { profile } from '@/lib/interfaces';
-import { useForm, usePage } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
+import { PencilLine, Trash2 } from 'lucide-react';
 import { toast } from 'react-toastify';
-
 function ProfileItem({ profile }: { profile: profile }) {
-    const { flash } = usePage().props;
     const {
         data,
-        put,
         delete: destroy,
         processing,
-        errors,
     } = useForm({
         full_name: profile.full_name,
         phone: profile.phone,
         email: profile.email,
+        address: profile.address,
         country: profile.country,
         id: profile.id,
     });
@@ -31,7 +29,7 @@ function ProfileItem({ profile }: { profile: profile }) {
     };
 
     return (
-        <div className="sd:flex my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
+        <div className="my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
             {/* Mobile Card View */}
             <div className="md:hidden">
                 <h2 className="text-lg font-semibold text-gray-800">{profile.full_name}</h2>
@@ -39,10 +37,15 @@ function ProfileItem({ profile }: { profile: profile }) {
                 <p className="text-gray-600">Email: {profile.email}</p>
                 <p className="text-gray-600">Country: {profile.country}</p>
                 <div className="mt-2 flex justify-end">
-                    <button className="focus:shadow-outline mr-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
-                        Edit
+                    <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                        <PencilLine size="18px" /> Edit
                     </button>
-                    <button className="focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none">
+                    <button
+                        disabled={processing}
+                        onClick={() => handleDelete(profile)}
+                        className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
+                    >
+                        <Trash2 size="18px" />
                         Delete
                     </button>
                 </div>
@@ -67,14 +70,15 @@ function ProfileItem({ profile }: { profile: profile }) {
                     {/* Country takes up 1/12 of the space */} <p className="text-gray-600">{profile.country}</p>
                 </div>
                 <div className="flex w-1/5 justify-end">
-                    <button className="focus:shadow-outline mr-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
-                        Edit
+                    <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                        <PencilLine size="18px" className="hidden md:block" />
                     </button>
                     <button
+                        disabled={processing}
                         onClick={() => handleDelete(profile)}
-                        className="focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
+                        className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
                     >
-                        Delete
+                        <Trash2 size="18px" />
                     </button>
                 </div>
             </div>

@@ -28,7 +28,7 @@ function ProfileIndex() {
             </div>
 
             <div className="container mx-auto mt-4 px-3">
-                <div className="sd:flex my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
+                <div className="my-2 hidden items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm md:flex">
                     <div className="hidden w-full items-center justify-around font-bold md:flex">
                         <div className="mx-2 w-1/6 text-left">Name</div>
                         <div className="mx-2 w-1/6 text-left">Phone</div>
@@ -41,7 +41,7 @@ function ProfileIndex() {
             {profiles.length > 0 ? (
                 <div className="container mx-auto mt-4 px-3">{mappedProfiles}</div>
             ) : (
-                <div className="sd:flex container mx-auto my-2 mt-4 min-h-25 max-w-[1512px] items-center justify-between rounded-md border-b-2 bg-white px-3 py-4 shadow-sm">
+                <div className="container mx-auto my-2 mt-4 min-h-25 max-w-[1512px] items-center justify-between rounded-md border-b-2 bg-white px-3 py-4 shadow-sm sm:flex">
                     <p className="text-center text-4xl font-bold text-gray-600">No profiles found.</p>
                 </div>
             )}
