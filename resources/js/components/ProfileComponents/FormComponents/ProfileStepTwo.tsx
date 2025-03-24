@@ -21,8 +21,10 @@ function ProfileStepTwo({ onSubmit, addressData, handleAddressData, prevStep }: 
 
     return (
         <div className="">
-            <MapPinCheck size={'50'} className="hidden sm:block" />
-
+            <div className="mb-5 flex items-center justify-center border-b-2 border-gray-200 pb-2">
+                <MapPinCheck size={'50'} className="hidden sm:block" />
+                <h2 className="mx-2 text-3xl font-bold">Address Information</h2>
+            </div>
             <div className="mb-4">
                 <label htmlFor="address" className="mb-2 block text-sm font-bold text-gray-700">
                     Address:

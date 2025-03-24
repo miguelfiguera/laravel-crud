@@ -27,7 +27,10 @@ function ProfileStepOne({ contactData, handleContactData, nextStep }: Props) {
     };
     return (
         <div className="">
-            <Contact size={'50'} className="hidden sm:block" />
+            <div className="mb-5 flex items-center justify-center border-b-2 border-gray-200 pb-2">
+                <Contact size={'50'} className="hidden sm:block" />
+                <h2 className="mx-2 text-3xl font-bold">Personal Information</h2>
+            </div>
             <div className="mb-4">
                 <label htmlFor="full_name" className="mb-2 block text-sm font-bold text-gray-700">
                     Full Name:
