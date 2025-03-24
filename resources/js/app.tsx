@@ -17,7 +17,7 @@ createInertiaApp({
         root.render(
             <>
                 <App {...props} />
-                <ToastContainer />
+                <ToastContainer position="top-center" />
             </>,
         );
     },

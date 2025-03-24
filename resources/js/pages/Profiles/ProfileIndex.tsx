@@ -1,8 +1,10 @@
+import ModalConfirmation from '@/components/ProfileComponents/ModalConfirmation';
 import ProfileItem from '@/components/ProfileComponents/ProfileItem';
 import { profile } from '@/lib/interfaces';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { CircleX, Search } from 'lucide-react';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface PageProps {
     profiles: profile[];
@@ -10,7 +12,14 @@ interface PageProps {
 }
 
 function ProfileIndex() {
+    //Getting Data from backend
     const { profiles } = usePage<PageProps>().props;
+    //Handle Delete with intertia
+    const { delete: destroy } = useForm();
+    //to delete through modal
+    const [open, setOpen] = useState(false);
+    const [settedProfile, setSettedProfile] = useState<profile>({} as profile);
+    //search bar
     const [filteredProfiles, setFilteredProfiles] = useState<profile[]>(profiles);
     const [searchFilter, setSearchFilter] = useState<string>('');
     const [filterType, setFilterType] = useState<string>('name'); // Default to 'name' for initial filtering
@@ -41,6 +50,30 @@ function ProfileIndex() {
         setFilteredProfiles(filtered); // Update filteredProfiles state
     };
 
+    const handleProfile = (profile: profile) => {
+        setSettedProfile(profile);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = (profile: profile) => {
+        if (open) {
+            destroy(route('profiles.destroy', profile.id), {
+                onSuccess: () => {
+                    toast.success(`${profile.full_name} deleted successfully`);
+                    setOpen(false);
+                },
+                onError: () => {
+                    toast.error('Failed to delete profile');
+                    setOpen(false);
+                },
+            });
+        }
+    };
+
     const handleReset = () => {
         setSearchFilter('');
         // setFilterType('name');
@@ -53,12 +86,15 @@ function ProfileIndex() {
         setSearchFilter(e.target.value);
     };
 
-    const mappedProfiles = filteredProfiles.map((profileItem: profile) => <ProfileItem key={profileItem.id} profile={profileItem} />);
+    const mappedProfiles = filteredProfiles.map((profileItem: profile) => (
+        <ProfileItem key={profileItem.id} handleProfile={handleProfile} profile={profileItem} />
+    ));
 
     return (
         <div className="min-h-screen">
-            <Head title="Profile" />
-            <div className="container mx-auto flex flex-col items-start justify-between border-b-2 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
+            <Head title="Profiles" />
+            {/*header*/}
+            <div className="sticky top-0 container mx-auto flex flex-col items-start justify-between border-b-2 bg-white px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
                 {/* Left Side: Heading and Description */}
                 <div>
                     <h1 className="text-2xl font-semibold text-gray-800 sm:text-3xl">Client List</h1>
@@ -94,6 +130,7 @@ function ProfileIndex() {
                 </div>
             </div>
 
+            {/*column headers*/}
             <div className="container mx-auto mt-4 px-3">
                 <div className="my-2 hidden items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm md:flex">
                     <div className="hidden w-full items-center justify-around font-bold md:flex">
@@ -105,6 +142,8 @@ function ProfileIndex() {
                     </div>
                 </div>
             </div>
+
+            {/*mapped profiles or No profiles guard*/}
             {filteredProfiles.length > 0 ? (
                 <div className="container mx-auto mt-4 px-3 pb-4">{mappedProfiles}</div>
             ) : (
@@ -112,6 +151,9 @@ function ProfileIndex() {
                     <p className="mx-auto text-center text-4xl font-bold text-gray-600">No profiles found.</p>
                 </div>
             )}
+
+            {/*Modal for delete confirmation*/}
+            <ModalConfirmation open={open} handleDelete={handleDelete} settedProfile={settedProfile} handleClose={handleClose} />
         </div>
     );
 }

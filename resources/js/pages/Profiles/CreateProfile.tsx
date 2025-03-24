@@ -1,9 +1,11 @@
-interface Props {}
-
-function CreateProfile(props: Props) {
-    const {} = props;
-
-    return <> Viva la france!</>;
+import CreateFormHOC from '@/components/ProfileComponents/CreateFormHOC';
+function CreateProfile() {
+    return (
+        <>
+            {' '}
+            <CreateFormHOC />
+        </>
+    );
 }
 
 export default CreateProfile;

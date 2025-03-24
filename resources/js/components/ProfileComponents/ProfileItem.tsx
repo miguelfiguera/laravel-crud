@@ -1,33 +1,6 @@
 import { profile } from '@/lib/interfaces';
-import { useForm } from '@inertiajs/react';
 import { PencilLine, Trash2 } from 'lucide-react';
-import { toast } from 'react-toastify';
-function ProfileItem({ profile }: { profile: profile }) {
-    const {
-        data,
-        delete: destroy,
-        processing,
-    } = useForm({
-        full_name: profile.full_name,
-        phone: profile.phone,
-        email: profile.email,
-        address: profile.address,
-        country: profile.country,
-        id: profile.id,
-    });
-    const handleDelete = (profile: profile) => {
-        if (confirm('Are you sure you want to delete this profile?')) {
-            destroy(route('profiles.destroy', profile.id), {
-                onSuccess: () => {
-                    toast.success(`${profile.full_name} deleted successfully`);
-                },
-                onError: () => {
-                    toast.error('Failed to delete profile');
-                },
-            });
-        }
-    };
-
+function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfile: (profile: profile) => void }) {
     return (
         <div className="my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
             {/* Mobile Card View */}
@@ -47,8 +20,7 @@ function ProfileItem({ profile }: { profile: profile }) {
                         <PencilLine size="18px" /> Edit
                     </button>
                     <button
-                        disabled={processing}
-                        onClick={() => handleDelete(profile)}
+                        onClick={() => handleProfile(profile)}
                         className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
                     >
                         <Trash2 size="18px" />
@@ -80,8 +52,7 @@ function ProfileItem({ profile }: { profile: profile }) {
                         <PencilLine size="18px" className="hidden md:block" />
                     </button>
                     <button
-                        disabled={processing}
-                        onClick={() => handleDelete(profile)}
+                        onClick={() => handleProfile(profile)}
                         className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
                     >
                         <Trash2 size="18px" />
