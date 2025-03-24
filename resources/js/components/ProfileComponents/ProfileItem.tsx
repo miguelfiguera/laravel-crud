@@ -1,8 +1,16 @@
 import { profile } from '@/lib/interfaces';
+import useModalState from '@/lib/zustand/OpenState';
 import { Link } from '@inertiajs/react';
 import { PencilLine, Trash2 } from 'lucide-react';
 
-function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfile: (profile: profile) => void }) {
+function ProfileItem({ profile }: { profile: profile }) {
+    const { open, setOpen, setSettedProfile } = useModalState();
+
+    const handleProfile = () => {
+        setSettedProfile(profile);
+        setOpen(true);
+    };
+
     return (
         <div className="my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
             {/* Mobile Card View */}
@@ -26,7 +34,7 @@ function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfi
                         </button>
                     </Link>
                     <button
-                        onClick={() => handleProfile(profile)}
+                        onClick={() => handleProfile()}
                         className="flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:ring-2 focus:ring-red-400 focus:ring-offset-1 focus:outline-none"
                     >
                         <Trash2 size="18px" />
@@ -62,7 +70,7 @@ function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfi
                         </button>
                     </Link>
                     <button
-                        onClick={() => handleProfile(profile)}
+                        onClick={() => handleProfile()}
                         className="flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:ring-2 focus:ring-red-400 focus:ring-offset-1 focus:outline-none"
                     >
                         <Trash2 size="18px" />

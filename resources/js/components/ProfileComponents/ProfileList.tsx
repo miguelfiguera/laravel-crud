@@ -1,10 +1,8 @@
 import { profile } from '@/lib/interfaces';
 import ProfileItem from './ProfileItem';
 
-function ProfileList({ filteredProfiles, handleProfile }: { filteredProfiles: profile[]; handleProfile: (profile: profile) => void }) {
-    const mappedProfiles = filteredProfiles.map((profileItem: profile) => (
-        <ProfileItem key={profileItem.id} handleProfile={handleProfile} profile={profileItem} />
-    ));
+function ProfileList({ filteredProfiles }: { filteredProfiles: profile[] }) {
+    const mappedProfiles = filteredProfiles.map((profileItem: profile) => <ProfileItem key={profileItem.id} profile={profileItem} />);
     return (
         <>
             {' '}

@@ -1,15 +1,33 @@
 import { profile } from '@/lib/interfaces';
+import useModalState from '@/lib/zustand/OpenState';
+import { useForm } from '@inertiajs/react';
 import { Trash2, X } from 'lucide-react';
+import { toast } from 'react-toastify';
 
-interface Props {
-    open: boolean;
-    settedProfile: profile | null; // Allow null if no profile is selected
-    handleDelete: (profile: profile) => void;
-    handleClose: () => void;
-}
-
-function ModalConfirmation({ open, settedProfile, handleDelete, handleClose }: Props) {
+function ModalConfirmation() {
+    const { delete: destroy } = useForm();
+    const { open, setOpen, settedProfile, setSettedProfile } = useModalState();
     //Early return if no profile is defined and also open is false
+
+    const handleClose = () => {
+        setSettedProfile({} as profile);
+        setOpen(false);
+    };
+
+    const handleDelete = (profile: profile) => {
+        if (open) {
+            destroy(route('profiles.destroy', profile.id), {
+                onSuccess: () => {
+                    toast.success(`${profile.full_name} deleted successfully`);
+                    setOpen(false);
+                },
+                onError: () => {
+                    toast.error('Failed to delete profile');
+                    setOpen(false);
+                },
+            });
+        }
+    };
     if (!open) return null;
 
     return (
