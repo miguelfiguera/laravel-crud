@@ -20,7 +20,7 @@ function CreateFormHOC() {
     });
 
     const nextStep = () => {
-        if (activeStep < 1) {
+        if (activeStep < 2) {
             setActiveStep((prevStep) => prevStep + 1);
         }
     };
@@ -53,6 +53,7 @@ function CreateFormHOC() {
                 toast.error(`${errorMessage}`, {
                     autoClose: 6000,
                 });
+                prevStep();
             },
         });
     };
