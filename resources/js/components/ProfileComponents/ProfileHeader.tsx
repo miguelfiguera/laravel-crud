@@ -1,10 +1,41 @@
+import { profile } from '@/lib/interfaces';
 import useProfileFilterStore from '@/lib/zustand/SearchState';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { CircleX, Search } from 'lucide-react';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 
+interface PageProps {
+    profiles: profile[];
+    [key: string]: profile[] | string;
+}
 function ProfileHeader() {
-    const { filteredProfiles, searchFilter, filterType, setFilterType, setSearchFilter, setFilteredProfiles } = useProfileFilterStore();
+    const { profiles } = usePage<PageProps>().props;
+    const { searchFilter, filterType, setFilterType, setSearchFilter, setFilteredProfiles } = useProfileFilterStore();
+    useEffect(() => {
+        setFilteredProfiles(profiles);
+        filterProfiles();
+    }, [searchFilter, filterType, profiles]);
+
+    const filterProfiles = () => {
+        let filtered: profile[] = [...profiles]; // Start with a copy of all profiles
+
+        if (searchFilter && filterType) {
+            filtered = profiles.filter((profileItem: profile) => {
+                const searchTermLower = searchFilter.toLowerCase();
+                switch (filterType) {
+                    case 'name':
+                        return profileItem.full_name.toLowerCase().includes(searchTermLower);
+                    case 'email':
+                        return profileItem.email.toLowerCase().includes(searchTermLower);
+                    case 'phone':
+                        return profileItem.phone.toLowerCase().includes(searchTermLower);
+                    default:
+                        return true; // Should not happen, but prevents errors. Shows all profiles
+                }
+            });
+        }
+        setFilteredProfiles(filtered); // Update filteredProfiles state
+    };
 
     //Filter
     const SearchFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
