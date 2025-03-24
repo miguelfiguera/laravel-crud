@@ -13,7 +13,7 @@ export default function Show({ profile }: Props) {
             <div className="container mx-auto min-h-screen p-6">
                 {' '}
                 {/* Light background */}
-                <div className="mb-6 flex items-center justify-between">
+                <div className="mb-6 flex flex-col items-center justify-between gap-5 sm:flex-row">
                     <h1 className="text-3xl font-extrabold tracking-tight text-gray-800">Profile Details</h1>
                     <div>
                         <Link
