@@ -1,0 +1,56 @@
+Laravel Crash course:
+
+File Structure
+App folder:
+1. Http (controller)
+2. Models
+3. Providers
+
+This is the principal folder for development.
+
+ bootstrap:
+ 1. app
+ 
+ This is the routing folder.
+ 
+ Config:
+ 
+this has the database configuration.
+
+Laravel has factories to define the seed data for this app.
+
+Seeders has all the seeders scripts.
+
+Public:
+
+Has the index.php to handle requests.
+This is exposed to the browser, avoid putting sensitive data here.
+
+Resources:
+
+This handles views, css and js.
+
+Routes:
+
+Handles routes too.
+
+Tests... handles tests.
+
+.env handles enviromental variables.
+
+"php artisan list" shows the commands available on the artisan.
+
+### Create a model:
+
+php artisan make:model -m
+
+
+
+/////////////////////////////
+
+
+
+
+InertiaJS + Laravel.
+
+
