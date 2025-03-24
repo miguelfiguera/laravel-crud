@@ -1,11 +1,15 @@
 import { profile } from '@/lib/interfaces';
+import { Link } from '@inertiajs/react';
 import { PencilLine, Trash2 } from 'lucide-react';
+
 function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfile: (profile: profile) => void }) {
     return (
         <div className="my-2 items-center justify-between rounded-md border-b-2 bg-white px-2 py-4 shadow-sm">
             {/* Mobile Card View */}
             <div className="border-b-2 md:hidden">
-                <h2 className="text-lg font-semibold text-gray-800">{profile.full_name}</h2>
+                <Link href={route('profiles.show', { profile: profile.id })} className="block">
+                    <h2 className="text-lg font-semibold text-gray-800">{profile.full_name}</h2>
+                </Link>
                 <p className="max-w-[50%] text-gray-600">
                     <strong>Phone:</strong> {profile.phone}
                 </p>
@@ -32,7 +36,9 @@ function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfi
             {/* Desktop Row View */}
             <div className="hidden w-full items-center justify-around md:flex">
                 <div className="mx-2 w-1/6 text-left">
-                    <p className="font-semibold text-gray-800">{profile.full_name}</p>
+                    <Link href={route('profiles.show', { profile: profile.id })} className="block">
+                        <p className="font-semibold text-gray-800">{profile.full_name}</p>
+                    </Link>
                 </div>
                 <div className="mx-2 w-1/6 text-left">
                     {' '}
