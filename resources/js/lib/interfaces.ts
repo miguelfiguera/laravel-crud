@@ -8,6 +8,8 @@ export interface profile {
     address: string;
 }
 
-export interface ContactData extends Pick<profile, 'full_name' | 'phone' | 'email' | 'id'> {}
-export interface AddressData extends Pick<profile, 'country' | 'state' | 'address'> {}
-export interface ContactDataNoId extends Pick<profile, 'full_name' | 'phone' | 'email'> {}
+// Use `type` instead of an empty interface
+// This is to avoid Eslint error about empty interfaces
+export type ContactData = Pick<profile, 'full_name' | 'phone' | 'email' | 'id'>;
+export type AddressData = Pick<profile, 'country' | 'state' | 'address'>;
+export type ContactDataNoId = Pick<profile, 'full_name' | 'phone' | 'email'>;

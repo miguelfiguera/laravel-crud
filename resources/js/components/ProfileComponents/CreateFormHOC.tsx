@@ -10,7 +10,7 @@ import Spinner from './FormComponents/Spinner';
 
 function CreateFormHOC() {
     const [activeStep, setActiveStep] = useState(0);
-    const { post, data, setData, errors } = useForm({
+    const { post, data, setData } = useForm({
         full_name: '',
         email: '',
         phone: '',
@@ -48,7 +48,7 @@ function CreateFormHOC() {
                 // Capture the error object
                 console.error('Submission failed:', error); // Log the entire error for debugging
 
-                let errorMessage = Object.values(error).flat().join('\n'); // Default message
+                const errorMessage = Object.values(error).flat().join('\n'); // Default message
 
                 toast.error(`${errorMessage}`, {
                     autoClose: 6000,

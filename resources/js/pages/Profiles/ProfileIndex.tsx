@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 interface PageProps {
     profiles: profile[];
-    [key: string]: any;
+    [key: string]: profile[] | string;
 }
 
 function ProfileIndex() {

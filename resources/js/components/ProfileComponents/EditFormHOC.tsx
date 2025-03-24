@@ -11,7 +11,7 @@ import Spinner from './FormComponents/Spinner';
 function EditFormHOC() {
     const { profile } = usePage<{ profile: profile }>().props;
     const [activeStep, setActiveStep] = useState(0);
-    const { put, data, setData, errors, processing } = useForm({
+    const { put, data, setData } = useForm({
         full_name: profile?.full_name || '', // Initialize with profile data or empty string
         email: profile?.email || '',
         phone: profile?.phone || '',
