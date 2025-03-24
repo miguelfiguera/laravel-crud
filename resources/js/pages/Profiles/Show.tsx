@@ -15,12 +15,20 @@ export default function Show({ profile }: Props) {
                 {/* Light background */}
                 <div className="mb-6 flex items-center justify-between">
                     <h1 className="text-3xl font-extrabold tracking-tight text-gray-800">Profile Details</h1>
-                    <Link
-                        href={route('profiles.index')}
-                        className="focus:ring-opacity-50 rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    >
-                        Back to Profiles
-                    </Link>
+                    <div>
+                        <Link
+                            href={route('profiles.edit', { profile: profile.id })}
+                            className="focus:ring-opacity-50 mx-3 rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        >
+                            Edit Profile
+                        </Link>
+                        <Link
+                            href={route('profiles.index')}
+                            className="focus:ring-opacity-50 rounded-md bg-gray-600 px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                        >
+                            Back to Profiles
+                        </Link>
+                    </div>
                 </div>
                 <div className="overflow-hidden rounded-lg bg-white shadow-lg">
                     <div className="px-4 py-5 sm:px-6">
