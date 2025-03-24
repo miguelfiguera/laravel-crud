@@ -20,9 +20,11 @@ function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfi
                     <strong>Country:</strong> {profile.country}
                 </p>
                 <div className="my-2 flex justify-end">
-                    <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
-                        <PencilLine size="18px" /> Edit
-                    </button>
+                    <Link href={route('profiles.edit', { profile: profile.id })}>
+                        <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                            <PencilLine size="18px" /> Edit
+                        </button>
+                    </Link>
                     <button
                         onClick={() => handleProfile(profile)}
                         className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
@@ -54,9 +56,11 @@ function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfi
                     {/* Country takes up 1/12 of the space */} <p className="text-gray-600">{profile.country}</p>
                 </div>
                 <div className="flex w-1/5 justify-end">
-                    <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
-                        <PencilLine size="18px" className="hidden md:block" />
-                    </button>
+                    <Link href={route('profiles.edit', { profile: profile.id })}>
+                        <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                            <PencilLine size="18px" className="hidden md:block" />
+                        </button>
+                    </Link>
                     <button
                         onClick={() => handleProfile(profile)}
                         className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"

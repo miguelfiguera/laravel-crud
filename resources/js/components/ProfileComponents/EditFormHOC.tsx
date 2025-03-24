@@ -8,7 +8,7 @@ import ProfileStepOne from './FormComponents/ProfileStepOne';
 import ProfileStepTwo from './FormComponents/ProfileStepTwo';
 import Spinner from './FormComponents/Spinner';
 
-function CreateFormHOC() {
+function EditFormHOC() {
     const [activeStep, setActiveStep] = useState(0);
     const { post, data, setData, errors } = useForm({
         full_name: '',
@@ -72,10 +72,7 @@ function CreateFormHOC() {
                     <h1 className="mx-2 py-4 text-center text-3xl font-bold underline">Client Information Form</h1>
                 </div>
                 <div className="container mx-auto max-w-[75%] rounded-md border p-4 pb-16 shadow-lg sm:max-w-[50%]">
-                    <div className="my-3 border-b py-3 sm:border-0">
-                        {' '}
-                        <MyStepper activeStep={activeStep} />
-                    </div>
+                    <MyStepper activeStep={activeStep} />
                     {activeStep == 0 && (
                         <ProfileStepOne
                             nextStep={nextStep}
@@ -98,4 +95,4 @@ function CreateFormHOC() {
     );
 }
 
-export default CreateFormHOC;
+export default EditFormHOC;

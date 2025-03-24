@@ -56,7 +56,7 @@ class ProfilesController extends Controller
      */
     public function edit(profile $profile)
     {
-        return Inertia::render('Profiles/CreateProfile', ['profile' => $profile]);
+        return Inertia::render('Profiles/EditProfile', ['profile' => $profile]);
     }
 
     /**
