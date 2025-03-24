@@ -122,8 +122,7 @@ function ProfileIndex() {
                         <CircleX onClick={handleReset} className={`${searchFilter === '' ? 'hidden' : 'me-2 block'}`} />
                     </div>
                     <Link href="/profiles/create">
-                        {' '}
-                        <button className="focus:shadow-outline mt-4 rounded bg-gray-700 px-4 py-2 font-bold text-white hover:bg-gray-900 focus:outline-none sm:mt-0">
+                        <button className="mt-4 rounded bg-gray-700 px-4 py-2 font-bold text-white hover:bg-gray-900 focus:ring-2 focus:ring-gray-400 focus:ring-offset-1 focus:outline-none sm:mt-0">
                             + New Client
                         </button>
                     </Link>

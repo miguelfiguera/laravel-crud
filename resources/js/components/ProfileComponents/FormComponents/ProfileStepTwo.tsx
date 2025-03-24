@@ -21,7 +21,7 @@ function ProfileStepTwo({ onSubmit, addressData, handleAddressData, prevStep }: 
 
     return (
         <div className="">
-            <MapPinCheck size={'50'} />
+            <MapPinCheck size={'50'} className="hidden sm:block" />
 
             <div className="mb-4">
                 <label htmlFor="address" className="mb-2 block text-sm font-bold text-gray-700">
@@ -67,13 +67,13 @@ function ProfileStepTwo({ onSubmit, addressData, handleAddressData, prevStep }: 
             </div>
             <button
                 onClick={prevStep}
-                className="focus:shadow-outline mr-2 rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700 focus:outline-none"
+                className="mr-2 rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700 focus:ring-2 focus:ring-gray-400 focus:ring-offset-1 focus:outline-none"
             >
                 Previous
             </button>
             <button
                 onClick={() => onSubmit()}
-                className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+                className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 focus:outline-none"
             >
                 Submit
             </button>

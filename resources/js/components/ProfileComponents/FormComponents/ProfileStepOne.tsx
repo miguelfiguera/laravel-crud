@@ -27,7 +27,7 @@ function ProfileStepOne({ contactData, handleContactData, nextStep }: Props) {
     };
     return (
         <div className="">
-            <Contact size={'50'} />
+            <Contact size={'50'} className="hidden sm:block" />
             <div className="mb-4">
                 <label htmlFor="full_name" className="mb-2 block text-sm font-bold text-gray-700">
                     Full Name:
@@ -71,13 +71,13 @@ function ProfileStepOne({ contactData, handleContactData, nextStep }: Props) {
                 />
             </div>
             <Link href="/">
-                <button className="focus:shadow-outline mx-3 rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700 focus:outline-none">
+                <button className="mx-3 rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700 focus:ring-2 focus:ring-gray-400 focus:ring-offset-1 focus:outline-none">
                     Cancel
                 </button>
             </Link>
             <button
                 onClick={handleClick}
-                className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+                className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 focus:outline-none"
             >
                 Next
             </button>

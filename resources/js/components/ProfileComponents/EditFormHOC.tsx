@@ -101,7 +101,10 @@ function EditFormHOC() {
                     </h1>
                 </div>
                 <div className="container mx-auto max-w-[75%] rounded-md border p-4 pb-16 shadow-lg sm:max-w-[50%]">
-                    <MyStepper activeStep={activeStep} />
+                    <div className="my-3 border-b py-3 sm:border-0">
+                        {' '}
+                        <MyStepper activeStep={activeStep} />
+                    </div>{' '}
                     {activeStep == 0 && <ProfileStepOne nextStep={nextStep} handleContactData={handleContactData} contactData={data} />}
                     {activeStep == 1 && (
                         <ProfileStepTwo onSubmit={handleUpdate} prevStep={prevStep} handleAddressData={handleAddressData} addressData={data} />

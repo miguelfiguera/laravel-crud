@@ -21,13 +21,13 @@ function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfi
                 </p>
                 <div className="my-2 flex justify-end">
                     <Link href={route('profiles.edit', { profile: profile.id })}>
-                        <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                        <button className="mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 focus:outline-none">
                             <PencilLine size="18px" /> Edit
                         </button>
                     </Link>
                     <button
                         onClick={() => handleProfile(profile)}
-                        className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
+                        className="flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:ring-2 focus:ring-red-400 focus:ring-offset-1 focus:outline-none"
                     >
                         <Trash2 size="18px" />
                         Delete
@@ -57,13 +57,13 @@ function ProfileItem({ profile, handleProfile }: { profile: profile; handleProfi
                 </div>
                 <div className="flex w-1/5 justify-end">
                     <Link href={route('profiles.edit', { profile: profile.id })}>
-                        <button className="focus:shadow-outline mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                        <button className="mr-2 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 focus:outline-none">
                             <PencilLine size="18px" className="hidden md:block" />
                         </button>
                     </Link>
                     <button
                         onClick={() => handleProfile(profile)}
-                        className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
+                        className="flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:ring-2 focus:ring-red-400 focus:ring-offset-1 focus:outline-none"
                     >
                         <Trash2 size="18px" />
                     </button>
