@@ -21,7 +21,7 @@ function ProfileIndex() {
     useEffect(() => {
         setFilteredProfiles(profiles);
         filterProfiles();
-    }, [searchFilter, filterType, profiles]); // Add profiles to dependencies
+    }, [searchFilter, filterType, profiles]);
 
     const filterProfiles = () => {
         let filtered: profile[] = [...profiles]; // Start with a copy of all profiles
@@ -54,7 +54,7 @@ function ProfileIndex() {
             <ColumnHeaders />
 
             {/*mapped profiles or No profiles guard*/}
-            <ProfileList filteredProfiles={filteredProfiles} />
+            <ProfileList />
 
             {/*Modal for delete confirmation*/}
             <ModalConfirmation />

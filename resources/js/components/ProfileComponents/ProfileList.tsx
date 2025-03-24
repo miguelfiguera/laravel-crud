@@ -1,7 +1,9 @@
 import { profile } from '@/lib/interfaces';
+import useProfileFilterStore from '@/lib/zustand/SearchState';
 import ProfileItem from './ProfileItem';
 
-function ProfileList({ filteredProfiles }: { filteredProfiles: profile[] }) {
+function ProfileList() {
+    const { filteredProfiles } = useProfileFilterStore();
     const mappedProfiles = filteredProfiles.map((profileItem: profile) => <ProfileItem key={profileItem.id} profile={profileItem} />);
     return (
         <>
