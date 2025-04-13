@@ -2,23 +2,34 @@ import { profile } from '@/lib/interfaces';
 import useModalState from '@/lib/zustand/OpenState';
 import { useForm } from '@inertiajs/react';
 import { Trash2, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-function ModalConfirmation() {
-    const { delete: destroy } = useForm();
-    const { open, setOpen, settedProfile, setSettedProfile } = useModalState();
-    //Early return if no profile is defined and also open is false
+interface ModalConfirmationProps {
+    // You might have props here, define them if needed.  For example:
+    // onClose: () => void;
+}
 
-    const handleClose = () => {
-        setSettedProfile({} as profile);
+function ModalConfirmation({}: ModalConfirmationProps) {
+    // Destructure props, even if empty
+    const { destroy } = useForm();
+    const { open, setOpen, settedProfile, setSettedProfile } = useModalState();
+    const [safeSettedProfile, setSafeSettedProfile] = useState<profile | null>(null); // Local state to handle settedProfile safely
+
+    useEffect(() => {
+        setSafeSettedProfile(settedProfile || null);
+    }, [settedProfile]);
+
+    const handleClose = (): void => {
+        setSettedProfile(null); // Or undefined, depending on what your Zustand store expects
         setOpen(false);
     };
 
-    const handleDelete = (profile: profile) => {
-        if (open) {
-            destroy(route('profiles.destroy', profile.id), {
+    const handleDelete = (): void => {
+        if (open && safeSettedProfile?.id) {
+            destroy(route('profiles.destroy', safeSettedProfile.id), {
                 onSuccess: () => {
-                    toast.success(`${profile.full_name} deleted successfully`);
+                    toast.success(`${safeSettedProfile.full_name} deleted successfully`);
                     setOpen(false);
                 },
                 onError: () => {
@@ -28,6 +39,7 @@ function ModalConfirmation() {
             });
         }
     };
+
     if (!open) return null;
 
     return (
@@ -40,12 +52,12 @@ function ModalConfirmation() {
                     <Trash2 size="150px" color="red" />
                 </div>
                 <h2 className="text-2xl font-semibold text-gray-800">Confirmación de Eliminación</h2>
-                {settedProfile ? ( // Conditionally render content if settedProfile is not null
+                {safeSettedProfile ? ( // Conditionally render content if settedProfile is not null
                     <>
-                        <p className="text-gray-600">¿Estás seguro de eliminar el perfil "{settedProfile.full_name}"?</p>
+                        <p className="text-gray-600">¿Estás seguro de eliminar el perfil "{safeSettedProfile.full_name}"?</p>
                         <div className="flex gap-4">
                             <button
-                                onClick={() => handleDelete(settedProfile)}
+                                onClick={handleDelete}
                                 className="focus:shadow-outline flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white shadow-lg hover:scale-125 hover:bg-red-700 focus:outline-none"
                             >
                                 <Trash2 size="18px" />
